@@ -1,14 +1,14 @@
 import tweepy
 import random
 
-#consumer_key = "IWoCpSOeWXJackdRPksc5y3en"
-#consumer_secret = "8yv1rP8lppmpDLl9OyRpON7VuoLl2wyX4mupIECpQ88idd6lgF"
-#access_token = "923171211324088320-SciHc7VDOkaMNtfabkBpEZtxb9ufhHa"
-#access_token_secret = "Yw6CHQIn4U5zMBmSCPZWYNs8LdgxAzxCMUDmPzxt4lgat"
+consumer_key = "IWoCpSOeWXJackdRPksc5y3en"
+consumer_secret = "8yv1rP8lppmpDLl9OyRpON7VuoLl2wyX4mupIECpQ88idd6lgF"
+access_token = "923171211324088320-SciHc7VDOkaMNtfabkBpEZtxb9ufhHa"
+access_token_secret = "Yw6CHQIn4U5zMBmSCPZWYNs8LdgxAzxCMUDmPzxt4lgat"
 
-#auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-#auth.set_access_token(access_token, access_token_secret)
-#api = tweepy.API(auth)
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth)
 
 chars = [ ['q','w','e','r','t','y','u','i','o','p'], ['a','s','d','f','g','h','j','k','l'], ['z','x','c','v','b','n','m'] ]
 boris_nouns = ["betchup", "spidder", "kid", "Bread", "children", "salad", "space jam","allabama","bible","chikcen","dad","dream","soup","cheek","cheeks","bird","snake","cheeese","berrris","berrries","berrys","meat","mellon","melon","allemabama","cake"]
@@ -104,13 +104,14 @@ def gensen():
             else:
                 return boris_good_adjectives[random.randint(0, len(boris_good_adjectives) - 1)] + " " + boris_nouns[random.randint(0, len(boris_nouns) - 1)]
     if "Sometimes" in sen:
-        sen += " I" 
+        sen += " I " + boris_do_verbs[random.randint(0, len(boris_do_verbs) - 1)] + " " + boris_nouns[random.randint(0, len(boris_nouns) - 1)]
     elif random.random() > 0.5:
         sen += " " + boris_names[random.randint(0, len(boris_names) - 1)]
     else:
         sen += " I " + boris_past_verbs[random.randint(0, len(boris_past_verbs) - 1)] + " my " + boris_nouns[random.randint(0, len(boris_nouns) - 1)]
     return sen
 
+tweet = ""
 
 if random.random() > 0.75:
     tweet = bweet()
@@ -124,3 +125,5 @@ elif random.random() > 0.75:
 else:
     tweet = gensen()
     print(tweet)
+
+api.update_status(tweet)
